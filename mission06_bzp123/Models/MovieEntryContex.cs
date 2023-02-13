@@ -14,6 +14,6 @@ namespace mission06_bzp123.Models
             //leave blank for now
         }
 
-        public DbSet<NewMovieForm> newMovies { get; set; }
+        public DbSet<NewMovieForm> NewMovies { get; set; }
     }
 }
