@@ -26,6 +26,21 @@ namespace mission06_bzp123.Migrations
                 {
                     table.PrimaryKey("PK_NewMovies", x => x.FormID);
                 });
+
+            migrationBuilder.InsertData(
+                table: "NewMovies",
+                columns: new[] { "FormID", "Category", "DirectorFirstName", "DirectorLastName", "Edited", "LentTo", "Notes", "Rating", "Title", "Year" },
+                values: new object[] { 1, "Musical/Romance", "Phyllida", "Lloyd", false, "My parents", "Fun Musical", "PG-13", "Mamma Mia!", 2008 });
+
+            migrationBuilder.InsertData(
+                table: "NewMovies",
+                columns: new[] { "FormID", "Category", "DirectorFirstName", "DirectorLastName", "Edited", "LentTo", "Notes", "Rating", "Title", "Year" },
+                values: new object[] { 2, "Sci-fi", "Phillip", "Noyce", false, "", "Good Vibes", "PG-13", "The Giver", 2014 });
+
+            migrationBuilder.InsertData(
+                table: "NewMovies",
+                columns: new[] { "FormID", "Category", "DirectorFirstName", "DirectorLastName", "Edited", "LentTo", "Notes", "Rating", "Title", "Year" },
+                values: new object[] { 3, "Comedy", "Maclain", "Nelson", false, "My roommate", "subversive", "PG", "Once I Was Engaged", 2021 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

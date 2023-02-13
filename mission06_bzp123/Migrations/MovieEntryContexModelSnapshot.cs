@@ -57,6 +57,47 @@ namespace mission06_bzp123.Migrations
                     b.HasKey("FormID");
 
                     b.ToTable("NewMovies");
+
+                    b.HasData(
+                        new
+                        {
+                            FormID = 1,
+                            Category = "Musical/Romance",
+                            DirectorFirstName = "Phyllida",
+                            DirectorLastName = "Lloyd",
+                            Edited = false,
+                            LentTo = "My parents",
+                            Notes = "Fun Musical",
+                            Rating = "PG-13",
+                            Title = "Mamma Mia!",
+                            Year = 2008
+                        },
+                        new
+                        {
+                            FormID = 2,
+                            Category = "Sci-fi",
+                            DirectorFirstName = "Phillip",
+                            DirectorLastName = "Noyce",
+                            Edited = false,
+                            LentTo = "",
+                            Notes = "Good Vibes",
+                            Rating = "PG-13",
+                            Title = "The Giver",
+                            Year = 2014
+                        },
+                        new
+                        {
+                            FormID = 3,
+                            Category = "Comedy",
+                            DirectorFirstName = "Maclain",
+                            DirectorLastName = "Nelson",
+                            Edited = false,
+                            LentTo = "My roommate",
+                            Notes = "subversive",
+                            Rating = "PG",
+                            Title = "Once I Was Engaged",
+                            Year = 2021
+                        });
                 });
 #pragma warning restore 612, 618
         }
