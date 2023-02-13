@@ -14,22 +14,22 @@ namespace mission06_bzp123.Models
         public int FormID { get; set; }
         
         //These fields are required in order to submit the form
-        [Required(ErrorMessage = "{0} is required")]
+        [Required]
         public string Category { get; set; }
-        
-        [Required(ErrorMessage = "{0} is required")]
+
+        [Required]
         public string Title { get; set; }
-        
-        [Required(ErrorMessage = "{0} is required")]
+
+        [Required]
         public int Year { get; set; }
-        
-        [Required(ErrorMessage = "{0} is required")]
+
+        [Required]
         public string DirectorFirstName { get; set; }
-        
-        [Required(ErrorMessage = "{0} is required")]
+
+        [Required]
         public string DirectorLastName { get; set; }
-        
-        [Required(ErrorMessage = "{0} is required")]
+
+        [Required]
         public string Rating { get; set; }
         
         //these fields are not required

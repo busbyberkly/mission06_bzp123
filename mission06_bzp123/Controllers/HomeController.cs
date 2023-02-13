@@ -40,9 +40,16 @@ namespace mission06_bzp123.Controllers
         [HttpPost]
         public IActionResult Form(NewMovieForm nmf)
         {
-            MovieContext.Add(nmf);
-            MovieContext.SaveChanges();
-            return View("Confirmation", nmf);
+            if (ModelState.IsValid)
+            {
+                MovieContext.Add(nmf);
+                MovieContext.SaveChanges();
+                return View("Confirmation", nmf);
+            }
+            else 
+            { 
+                return View(); 
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
