@@ -12,10 +12,13 @@ namespace mission06_bzp123.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private MovieEntryContex MovieContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        //constructor
+        public HomeController(ILogger<HomeController> logger, MovieEntryContex movieEntry)
         {
             _logger = logger;
+            MovieContext = movieEntry;
         }
 
         public IActionResult Index()
@@ -37,6 +40,8 @@ namespace mission06_bzp123.Controllers
         [HttpPost]
         public IActionResult Form(NewMovieForm nmf)
         {
+            MovieContext.Add(nmf);
+            MovieContext.SaveChanges();
             return View("Confirmation", nmf);
         }
 
