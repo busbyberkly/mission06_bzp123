@@ -14,8 +14,7 @@ namespace mission06_bzp123.Models
         public int FormID { get; set; }
         
         //These fields are required in order to submit the form
-        [Required]
-        public string Category { get; set; }
+        
 
         [Required]
         public string Title { get; set; }
@@ -40,6 +39,13 @@ namespace mission06_bzp123.Models
         [StringLength(25)]
         public string Notes { get; set; }
 
+
+        
+        //Build Foreign Key Relationship
+        public int CategoryId { get; set; }
+
+        [Required]
+        public Category Category { get; set; }
 
     }
 }

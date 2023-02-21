@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using mission06_bzp123.Models;
 using System;
@@ -11,13 +12,13 @@ namespace mission06_bzp123.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        
         private MovieEntryContex MovieContext { get; set; }
 
         //constructor
-        public HomeController(ILogger<HomeController> logger, MovieEntryContex movieEntry)
+        public HomeController(MovieEntryContex movieEntry)
         {
-            _logger = logger;
+            
             MovieContext = movieEntry;
         }
 
@@ -34,6 +35,7 @@ namespace mission06_bzp123.Controllers
         [HttpGet]
         public IActionResult Form()
         {
+            ViewBag.Categories =  MovieContext.Categories.ToList();
             return View();
         }
 
@@ -47,15 +49,54 @@ namespace mission06_bzp123.Controllers
                 return View("Confirmation", nmf);
             }
             else 
-            { 
+            {
+                ViewBag.Categories = MovieContext.Categories.ToList();
                 return View(); 
             }
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult MovieList()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var entries = MovieContext.NewMovies
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title)
+                .ToList();
+            return View(entries);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int formid)
+        {
+            ViewBag.Categories = MovieContext.Categories.ToList();
+            var entry = MovieContext.NewMovies.Single(x => x.FormID == formid);
+            return View("Form", entry);
+        }
+        
+        [HttpPost]
+        public IActionResult Edit(NewMovieForm editedentry)
+        {
+            
+                MovieContext.Update(editedentry);
+                MovieContext.SaveChanges();
+                return RedirectToAction("MovieList");          
+            
+            
+            
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int formid)
+        {
+            
+            var entry = MovieContext.NewMovies.Single(x => x.FormID == formid);
+            return View(entry);
+            
+        }
+        [HttpPost]
+        public IActionResult Delete(NewMovieForm removemovie)
+        {
+            MovieContext.NewMovies.Remove(removemovie);
+            MovieContext.SaveChanges();
+            return RedirectToAction("MovieList");
         }
     }
 }

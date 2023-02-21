@@ -15,15 +15,95 @@ namespace mission06_bzp123.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("mission06_bzp123.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Romantic Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Science Fiction"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Action"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Horror"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "Fantasy"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 9,
+                            CategoryName = "Thriller"
+                        },
+                        new
+                        {
+                            CategoryId = 10,
+                            CategoryName = "Musical"
+                        },
+                        new
+                        {
+                            CategoryId = 11,
+                            CategoryName = "Romance"
+                        },
+                        new
+                        {
+                            CategoryId = 12,
+                            CategoryName = "Mystery"
+                        },
+                        new
+                        {
+                            CategoryId = 13,
+                            CategoryName = "See Notes"
+                        });
+                });
+
             modelBuilder.Entity("mission06_bzp123.Models.NewMovieForm", b =>
                 {
                     b.Property<int>("FormID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("DirectorFirstName")
                         .IsRequired()
@@ -56,13 +136,15 @@ namespace mission06_bzp123.Migrations
 
                     b.HasKey("FormID");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("NewMovies");
 
                     b.HasData(
                         new
                         {
                             FormID = 1,
-                            Category = "Musical/Romance",
+                            CategoryId = 10,
                             DirectorFirstName = "Phyllida",
                             DirectorLastName = "Lloyd",
                             Edited = false,
@@ -75,7 +157,7 @@ namespace mission06_bzp123.Migrations
                         new
                         {
                             FormID = 2,
-                            Category = "Sci-fi",
+                            CategoryId = 2,
                             DirectorFirstName = "Phillip",
                             DirectorLastName = "Noyce",
                             Edited = false,
@@ -88,7 +170,7 @@ namespace mission06_bzp123.Migrations
                         new
                         {
                             FormID = 3,
-                            Category = "Comedy",
+                            CategoryId = 1,
                             DirectorFirstName = "Maclain",
                             DirectorLastName = "Nelson",
                             Edited = false,
@@ -98,6 +180,15 @@ namespace mission06_bzp123.Migrations
                             Title = "Once I Was Engaged",
                             Year = 2021
                         });
+                });
+
+            modelBuilder.Entity("mission06_bzp123.Models.NewMovieForm", b =>
+                {
+                    b.HasOne("mission06_bzp123.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

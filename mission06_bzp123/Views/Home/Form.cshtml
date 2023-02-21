@@ -5,8 +5,15 @@
 @model mission06_bzp123.Models.NewMovieForm
 <div>
     <form method="post">
+        <div asp-validation-summary="All"></div>
         <label asp-for="Category">Category:</label>
-        <input asp-for="Category"/>
+        <select asp-for="CategoryId">
+            <option value="">Select a Category</option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+        </select>
         <br />
         <label asp-for="Title">Title:</label>
         <input asp-for="Title"/>
