@@ -74,13 +74,18 @@ namespace mission06_bzp123.Controllers
         [HttpPost]
         public IActionResult Edit(NewMovieForm editedentry)
         {
-            
+            if (ModelState.IsValid)
+            {
                 MovieContext.Update(editedentry);
                 MovieContext.SaveChanges();
-                return RedirectToAction("MovieList");          
-            
-            
-            
+                return RedirectToAction("MovieList");
+
+            }
+            else
+            {
+                ViewBag.Categories = MovieContext.Categories.ToList();
+                return View("MovieList");
+            }
         }
 
         [HttpGet]

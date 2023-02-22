@@ -44,7 +44,7 @@ namespace mission06_bzp123.Models
         //Build Foreign Key Relationship
         public int CategoryId { get; set; }
 
-        [Required]
+        
         public Category Category { get; set; }
 
     }
